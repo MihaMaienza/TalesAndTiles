@@ -45,6 +45,11 @@ public class LoginServlet extends HttpServlet {
                     // Ricava e setta IDCarrello
                     int IDCarrello = carrello.getIDCarrello();
                     session.setAttribute("IDCarrello", IDCarrello);
+                    
+                 // Imposta IDWishlist in sessione
+                    WishlistDAO wishlistDAO = new WishlistDAO();
+                    int IDWishlist = wishlistDAO.getWishlistByUsername(username).getIDWishlist();
+                    session.setAttribute("IDWishlist", IDWishlist);
 
                     @SuppressWarnings("unchecked")
                     List<CartNoLog> cartNoLogItems = (List<CartNoLog>) session.getAttribute("cartNoLog");

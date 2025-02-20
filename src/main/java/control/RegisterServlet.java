@@ -80,6 +80,7 @@ public class RegisterServlet extends HttpServlet {
             } else {
                 utenteDAO.save(utente);
                 CarrelloDAO.CreaCarrello(username);//Quando creiamo un nuovo utente gli creiamo anche un carrello
+                WishlistDAO.CreaWishlist(username);
                 request.getRequestDispatcher("/view/registrationSuccess.jsp").forward(request, response);
             }
         } catch (SQLException e) {
