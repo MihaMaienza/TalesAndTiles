@@ -65,7 +65,7 @@ public class FinalizePurchaseServlet extends HttpServlet {
         ProdottoDAO prodottoDAO = new ProdottoDAO();
 
         ServletContext context = request.getServletContext();
-        String fontPath = context.getRealPath("/resources/");
+        String fontPath = context.getRealPath("/styles/");
 
         try (Connection con = ConDB.getConnection()) {
             con.setAutoCommit(false);
@@ -122,7 +122,7 @@ public class FinalizePurchaseServlet extends HttpServlet {
         PDType0Font helveticaBold = PDType0Font.load(document, Files.newInputStream(helveticaBoldPath));
 
         // Carica il logo
-        String logoPath = fontPath.replace("resources", "images/Tales&Tiles_LOGO.png");
+        String logoPath = fontPath.replace("styles", "images/Tales&Tiles_LOGO.png");
         PDImageXObject logo = PDImageXObject.createFromFile(logoPath, document);
 
         try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {

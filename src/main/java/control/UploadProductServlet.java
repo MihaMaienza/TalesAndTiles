@@ -43,7 +43,7 @@ public class UploadProductServlet extends HttpServlet {
             e.printStackTrace();
             throw new ServletException("Database error", e);
         }*/
-        RequestDispatcher view = request.getRequestDispatcher("/view/CaricamentoProdotto.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("/view/CaricamentoProdotto");
         view.forward(request, response);
     }
 
