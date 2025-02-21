@@ -1,4 +1,7 @@
 package model.DAO;
+
+import model.javaBeans.*;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
