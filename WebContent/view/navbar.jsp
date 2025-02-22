@@ -127,9 +127,20 @@
 	
                     <ul class="dropdown__menu">
                         <li>
+                            <% if(!isLoggedIn) { %>
                             <a href="#" class="dropdown__link btnLogin-popup" id="accountLink">
                                 <i class="ri-user-line"></i> Account
                             </a>
+                            <%} if(isLoggedIn) {
+                            		if(utenteTipo == 1){%>
+	                            <a href="${pageContext.request.contextPath}/view/AdminDashboard.jsp" class="dropdown__link" id="accountLink">
+	                                <i class="ri-user-line"></i> Account
+	                            </a>
+	                            <%}if(utenteTipo == 0){%>
+	                            <a href="${pageContext.request.contextPath}/view/UserDashboard.jsp" class="dropdown__link" id="accountLink">
+	                                <i class="ri-user-line"></i> Account
+	                            </a>
+	                            <% }} %>
                         </li>
 <% if(isLoggedIn) { %>
                         <li>
