@@ -1,0 +1,141 @@
+/* Base styles for the banner */
+.banner {
+    position: relative;
+    width: 100%;
+    margin-top: 100px;
+    height: 500px; /* Altezza del banner */
+    overflow: hidden;
+    border: 5px solid hsl(181, 53%, 30%);; /* Aggiungi bordo qui */	/*Questa e la linea di codice sotto servono per il bordo intorno al banner, prima era #000*/
+    border-radius: 10px; /* Opzionale: aggiunge angoli arrotondati al bordo */
+}
+
+.slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 100%; /* Assicurati che il container delle slide sia largo 100% */
+}
+
+.slide {
+    flex: 0 0 100%; /* Ogni slide occupa il 100% della larghezza */
+    width: 1920px; /* Larghezza esatta */
+    height: 500px; /* Altezza esatta */
+    overflow: hidden; /* Nasconde la parte in eccesso dell'immagine */
+    position: relative;
+
+    /* Per adattare l'immagine */
+    background-size: cover; /* Ritaglia l'immagine per coprire l'intero spazio */
+    background-position: center; /* Centra l'immagine */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.content {
+    text-align: center;
+    color: white;
+    background: rgba(0, 0, 0, 0.5); /* Background semi-trasparente per migliorare la leggibilità */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.content h2 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.content p {
+    font-size: 24px;
+    margin-bottom: 40px;
+}
+
+.btn {
+    padding: 10px 20px;
+    background-color: #ffffff;
+    color: #000000;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+
+.controls .prev,
+.controls .next {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.indicators {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+}
+
+.indicators .indicator {
+    width: 10px;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: 0 5px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.indicators .indicator.active {
+    background-color: white;
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+    .banner {
+        height: 300px; /* Altezza del banner per schermi più piccoli */
+    }
+
+    .slide {
+        height: 300px; /* Altezza del banner per schermi più piccoli */
+    }
+
+    .content h2 {
+        font-size: 32px;
+    }
+
+    .content p {
+        font-size: 18px;
+    }
+
+    .btn {
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .banner {
+        height: 200px; /* Altezza del banner per schermi più piccoli */
+    }
+
+    .slide {
+        height: 200px; /* Altezza del banner per schermi più piccoli */
+    }
+
+    .content h2 {
+        font-size: 24px;
+    }
+
+    .content p {
+        font-size: 16px;
+    }
+
+    .btn {
+        padding: 6px 12px;
+    }
+}

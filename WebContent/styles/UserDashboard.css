@@ -1,0 +1,93 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f6fc;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 90%;
+    max-width: 1200px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-item {
+    flex: 1 1 calc(33.333% - 40px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #e9f0f7;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin: 10px;
+    max-width: 300px;
+}
+
+.dashboard-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.dashboard-item .icon {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.dashboard-item .icon.prodotto {
+    color: #e74c3c;
+}
+
+.dashboard-item .icon.lista {
+    color: #ff8800;
+}
+
+.dashboard-item .icon.user {
+    color: #237375;
+}
+
+.dashboard-item .icon.ritorno {
+    color: #237375;
+}
+
+.dashboard-item .info {
+    text-align: center;
+}
+
+.dashboard-item .info h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.dashboard-item .info p {
+    margin: 5px 0 0;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+@media (max-width: 480px) {
+    .dashboard {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .dashboard-item {
+        flex: 1 1 100%;
+        max-width: 100%;
+        margin: 5px 0;
+    }
+}
