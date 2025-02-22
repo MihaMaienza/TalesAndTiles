@@ -139,3 +139,11 @@
 <div id="flashMessage" class="flash-message"></div>
 </body>
 </html>
+<script>
+    if (!sessionStorage.getItem("reloaded")) {
+        sessionStorage.setItem("reloaded", "true");
+        window.location.reload(true); // Forza il refresh ignorando la cache
+    } else {
+        sessionStorage.removeItem("reloaded"); // Reset per le prossime volte
+    }
+</script>
