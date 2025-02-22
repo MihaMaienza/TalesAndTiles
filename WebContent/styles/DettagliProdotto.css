@@ -1,0 +1,161 @@
+/* Base styles for the product details */
+.product-details {
+    margin-top: 100px !important;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #34495e;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 1200px;
+    color: #ecf0f1;
+}
+
+.titolo h1 {
+    width: 100%;
+    text-align: center;
+    font-size: 50px;
+}
+
+.product-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.product-image img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+.product-info {
+    flex: 2; /* Adjust to make room for buttons */
+    text-align: left;
+}
+
+.product-info h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #ecf0f1;
+}
+
+.product-info p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #bdc3c7;
+}
+
+.product-info h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #4CAF50;
+}
+
+.product-info h3 {
+    font-size: 1.5rem;
+    margin: 10px 0;
+    color: #ecf0f1;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.action-buttons button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-to-cart-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #45a049;
+}
+
+.add-to-wishlist {
+    background-color: #ff5050;
+    color: white;
+}
+
+.add-to-wishlist:hover {
+    background-color: red;
+}
+
+/* Preserve original button styles in cards */
+.card .add-to-cart-btn,
+.card .add-to-wishlist {
+    background-color: initial;
+    color: initial;
+}
+
+.card .add-to-cart-btn:hover,
+.card .add-to-wishlist:hover {
+    background-color: initial;
+    color: initial;
+}
+
+.flash-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    display: none;
+    z-index: 1000;
+}
+
+.flash-message.error {
+    background-color: #f44336;
+}
+
+@media (max-width: 768px) {
+    .product-details {
+        flex-direction: column;
+        margin: 20px;
+        padding: 10px;
+    }
+
+    .product-image {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .product-info h1 {
+        font-size: 2rem;
+    }
+
+    .product-info h2 {
+        font-size: 1.5rem;
+    }
+
+    .product-info h3 {
+        font-size: 1.2rem;
+    }
+
+    .action-buttons {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+    }
+}
