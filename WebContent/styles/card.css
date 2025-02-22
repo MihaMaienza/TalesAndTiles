@@ -1,0 +1,241 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap');
+
+.catalog-title h1 {
+  width: 100%;
+  text-align: center;
+  margin-top: 50px;/*modificato per separarlo dal banner, prima era 150px*/
+  font-size: 50px;
+}
+
+ul{
+  list-style:none;
+}
+
+.containerP{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 colonne di default */
+  gap: 50px; /* Spazio tra gli elementi */
+  padding: 5% 5%; /* Spazio attorno alla griglia */
+  margin-bottom: 15%;
+  padding-bottom: 50px; /* Aggiunta di padding-bottom per evitare la sovrapposizione del footer */
+}
+
+
+.containerP .card{
+  position: relative;
+  width: 320px;
+  height: 450px;
+  background: #232323;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.containerP .card:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: hsl(181, 53%, 30%);
+  clip-path: circle(150px at 80% 20%);
+  transition: clip-path 0.5s ease-in-out;
+}
+
+.containerP .card:hover:before {
+  clip-path: circle(300px at 80% -20%);
+  background: hsl(181, 53%, 30%);/*Aggiunto da valutare#d3a7b1;*/
+}
+
+.containerP .card:after{
+  content: 'TalesAndTiles';
+  position: absolute;
+  top: 30%;
+  left: -20%;
+  font-size: 12em;
+  font-weight: 800;
+  font-style: italic;
+  color: rgba(255,255,255, 0.04); 
+}
+
+.containerP .card .imgBx{
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  z-index: 90;
+  width: 100%;
+  height: 220px;
+  transition: 0.5s;
+}
+
+.containerP .card:hover .imgBx{
+  position: absolute;
+  top: 0%;
+  transform: translateY(0%);
+}
+
+.containerP .card .imgBx img{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 200px;
+  max-height:220px;
+}
+
+.containerP .card .contentBx{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  text-align: center;
+  transition: 1s;
+  z-index: 10;
+}
+
+.containerP .card:hover .contentBx{
+  height: 210px;
+}
+
+.containerP .card .contentBx h2{
+  position: relative;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #fff;
+}
+
+.containerP .card .contentBx .wish,
+.containerP .card .contentBx .price{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 20px;
+  transition: 0.5s;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.containerP .card:hover .contentBx .wish,
+.containerP .card:hover .contentBx .price{
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0.5s;
+}
+
+.containerP .card .contentBx .wish h3{
+  color: #fff;
+  font-weight: 300;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-right: 10px;
+}
+
+.containerP .card .contentBx .price h2{
+  color: #fff;
+  font-weight: 300;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-right: 10px;
+}
+
+.containerP .card .contentBx .wish span{
+  width: 26px;
+  height: 26px;
+  text-align: center;
+  line-height: 26px;
+  font-size: 14 px;
+  display: inline-block;
+  color: #111;
+  background: #fff;
+  margin: 0 5px;
+  transition: 0.5s;
+  color: #111; 
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.containerP .card .contentBx .wish span:hover{
+  background: #d3a7b1;
+  color: #fff;
+  transition: color .5s;
+}
+
+
+/*CSS BOTTONE*/
+.containerP .card .contentBx button {
+ --color: #d3a7b1;/*#560bad*/;
+ font-family: inherit;
+ display: inline-block;
+ width: 8em;
+ /*height: 2.6em;*/
+ line-height: 2.5em;
+ /*margin: 20px;*/
+ position: relative;
+ overflow: hidden;
+ border: 2px solid var(--color);
+ transition: color .5s;
+ z-index: 1;
+ font-size: 17px;
+ border-radius: 6px;
+ font-weight: 500;
+ color: var(--color);
+ background-color:transparent;
+}
+
+.containerP .card .contentBx button:before {
+ content: "";
+ position: absolute;
+ z-index: -1;
+ background: var(--color);
+ height: 150px;
+ width: 200px;
+ border-radius: 50%;
+}
+
+.containerP .card .contentBx button:hover {
+ color: #000;
+ opacity: 1;
+  transform: translateY(0px);
+  transition-delay: 0.25s;
+}
+
+.containerP .card .contentBx button:before {
+ top: 100%;
+ left: 100%;
+ transition: all .7s;
+}
+
+.containerP .card .contentBx button:hover:before {
+ top: -30px;
+ left: -30px;
+}
+
+.containerP .card .contentBx button:active:before {
+ background: #d3a7b1;/*#3a0ca3;*/
+ transition: background 0s;
+}
+
+/* Regolazioni responsive */
+@media (max-width: 1200px) {
+  .containerP {
+    grid-template-columns: repeat(2, 1fr); /* 2 colonne per schermi medi */
+    padding: 5% 10%; /* Aggiustare il padding per centratura */
+  }
+}
+
+@media (max-width: 900px) {
+  .containerP {
+    grid-template-columns: 1fr; /* 1 colonna per schermi piccoli */
+    padding: 5% 10%; /* Aggiustare il padding per centratura */
+  }
+}
+
+@media (max-width: 600px) {
+  .containerP {
+    grid-template-columns: 1fr; /* 1 colonna per schermi molto piccoli */
+    padding: 5% 10%; /* Aggiustare il padding per centratura */
+  }
+}
