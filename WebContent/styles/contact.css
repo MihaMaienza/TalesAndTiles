@@ -1,0 +1,112 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #E8E3C3;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Main container to ensure footer is at the bottom */
+.main-content {
+    flex: 1;
+}
+
+::-webkit-scrollbar{
+  width: 10px;
+}
+
+::-webkit-scrollbar-track{
+  width: 10px;
+  background-color: hsl(181, 53%, 30%);
+  border-left: 0 solid white;
+  border-right: 0 solid white;
+}
+
+::-webkit-scrollbar-thumb{
+  background:#d3a7b1;
+  width: 0;
+  height: 15%;
+  cursor: pointer;
+}
+
+/* Sezione stile */
+section {
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-bottom: 3px solid #065A60;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1s forwards;
+}
+
+section#home {
+	margin-top:88px;
+    background: linear-gradient(to bottom right, #028090, #00A896);
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+    animation-delay: 0.2s;
+}
+
+section#about, section#services, section#team, section#contact {
+    background-color: #E8E3C3;
+    color: #333;
+    padding: 40px 20px;
+}
+
+section#contact{
+	min-height:500px;
+}
+
+section h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+section p {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+
+#email-contact, #phone-contact {
+    margin-top: 20px;
+}
+
+#email-contact h3, #phone-contact h3 {
+    font-size: 1.5em;
+}
+
+.social-media a:hover img {
+    opacity: 0.7;
+}
+
+/* Animazioni */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    nav ul li {
+        display: block;
+        margin: 10px 0;
+    }
+    section#contact{
+	min-height:600px;
+}
+}

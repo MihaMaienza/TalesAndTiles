@@ -1,0 +1,143 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.order-summary {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.shipping-address, .payment-method, .delivery-date, .products, .order-total {
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+p, button {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #333;
+}
+
+button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    cursor: pointer;
+    display: block;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#address-form, #card-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#address-form input, #card-form input {
+    margin: 5px 0;
+    padding: 8px;
+    font-size: 14px;
+}
+
+.products {
+    border-top: 1px solid #ccc;
+    padding-top: 20px;
+}
+
+.product {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
+
+.product:last-child {
+    border-bottom: none;
+}
+
+.product-image img {
+    width: 100px;
+    height: auto;
+    margin-right: 20px;
+}
+
+.product-details p {
+    margin: 5px 0;
+}
+
+.buttons {
+    text-align: center;
+}
+
+button.finalize {
+    background-color: #28a745;
+}
+
+button.cancel {
+    background-color: #dc3545;
+}
+
+.flash-message {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 10px 20px;
+        background-color: #4CAF50; /* Verde per il successo */
+        color: white;
+        border-radius: 5px;
+        display: none;
+        z-index: 1000;
+    }
+    .flash-message.error {
+        background-color: #f44336; /* Rosso per l'errore */
+    }
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    h2 {
+        font-size: 16px;
+    }
+
+    .products .product {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .product-image img {
+        width: 80px;
+        margin-bottom: 10px;
+    }
+
+    .product-details p {
+        text-align: center;
+    }
+
+    button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}

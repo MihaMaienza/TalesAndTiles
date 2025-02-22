@@ -1,0 +1,49 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap');
+/*=============== BASE ===============*/
+* {
+  box-sizing: border-box;
+  margin:0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  font-size: 16px;
+  background-color: #E8E3C3;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar{
+  width: 10px;
+}
+
+::-webkit-scrollbar-track{
+  width: 10px;
+  background-color: hsl(181, 53%, 30%);
+  border-left: 0 solid white;
+  border-right: 0 solid white;
+}
+
+::-webkit-scrollbar-thumb{
+  background:#d3a7b1;
+  width: 0;
+  height: 15%;
+  cursor: pointer;
+}
+
+.flash-message {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 10px 20px;
+        background-color: #4CAF50; /* Verde per il successo */
+        color: white;
+        border-radius: 5px;
+        display: none;
+        z-index: 1000;
+    }
+    .flash-message.error {
+        background-color: #f44336; /* Rosso per l'errore */
+    }
