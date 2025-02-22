@@ -17,10 +17,11 @@
 <style>
 /* Dropdown per l'ordinamento */
 .sort-dropdown {
-    display: inline-block;
+	display: inline-block;
     position: relative;
     max-width: 200px;
-    margin: 10px;
+    margin-left: 40px;
+    margin-top: 100px;
 }
 
 .sort-dropdown select {
