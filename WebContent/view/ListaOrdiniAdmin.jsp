@@ -53,7 +53,7 @@
             <thead class="thead-dark">
                 <tr>
                     <th>ID Ordine</th>
-                    <th>Utente</th>
+                    <th class="sortable" onclick="sortTable('utente')">Utente <span class="sort-indicator" id="utente-indicator">▼</span></th>
                     <th class="sortable" onclick="sortTable('data-ordine')">Data Ordine <span class="sort-indicator" id="data-ordine-indicator">▼</span></th>
                     <th>Data Consegna</th>
                     <th class="sortable" onclick="sortTable('prezzo-totale')">Prezzo Totale <span class="sort-indicator" id="prezzo-totale-indicator">▼</span></th>
@@ -64,7 +64,7 @@
                 <% for (Ordine ordine : ordini) { %>
                     <tr class="order-row">
                         <td><%= ordine.getIDOrdine() %></td>
-                        <td><%= ordine.getUsername() %></td>
+                        <td class="utente" data-order="<%= ordine.getUsername() %>"><%= ordine.getUsername() %></td>
                         <td class="data-ordine" data-order="<%= ordine.getDataOrdine().getTime() %>"><%= ordine.getDataOrdine() %></td>
                         <td><%= ordine.getDataConsegna() %></td>
                         <td class="prezzo-totale" data-order="<%= ordine.getPrezzoTotale() %>">€<%= ordine.getPrezzoTotale() %></td>
@@ -100,15 +100,15 @@
                 var aValue = a.getElementsByClassName(columnClass)[0].getAttribute('data-order');
                 var bValue = b.getElementsByClassName(columnClass)[0].getAttribute('data-order');
 
-                if (columnClass === 'prezzo-totale') {
+                // Gestisci i casi numerici
+                if (columnClass === 'prezzo-totale' || columnClass === 'data-ordine') {
                     aValue = parseFloat(aValue);
                     bValue = parseFloat(bValue);
-                }
-
-                if (sortOrder === 'asc') {
-                    return aValue - bValue;
-                } else {
-                    return bValue - aValue;
+                    return sortOrder === 'asc' ? aValue - bValue : bValue - aValue;
+                } 
+                // Gestisci l'ordinamento alfabetico per "utente"
+                else if (columnClass === 'utente') {
+                    return sortOrder === 'asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
                 }
             });
 
@@ -123,6 +123,7 @@
             // Aggiorna l'indicatore di ordinamento
             updateSortIndicators();
         }
+
 
         function updateSortIndicators() {
             var indicators = document.querySelectorAll('.sort-indicator');
