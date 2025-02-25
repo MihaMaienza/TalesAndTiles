@@ -1,12 +1,5 @@
 		 <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/footer.css">
 	<footer>
-		<div class="waves">
-
-			<div class="wave" id="wave1"> </div>
-			<div class="wave" id="wave2"> </div>
-			<div class="wave" id="wave3"> </div>
-			<div class="wave" id="wave4"> </div>
-		</div>
 			<ul class="social_icon">
 				<li> <a href="https://www.facebook.com"> <ion-icon name="logo-facebook"></ion-icon></a></li>
 				<li> <a href="https://www.instagram.com"> <ion-icon name="logo-instagram"></ion-icon></a></li>

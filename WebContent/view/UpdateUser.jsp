@@ -13,7 +13,7 @@
     <title>Aggiorna Dati Utente</title>
     <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/UpdateUser.css">
     <script src="<%= request.getContextPath() %>/scripts/scriptUpdateUser.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">    
 </head>
 <body>
 <div class="account-container">
