@@ -29,7 +29,7 @@
         var productIds = <%= new Gson().toJson(productIds) %>;
     </script>
     <script src="<%= request.getContextPath() %>/scripts/resocontoOrdine.js" defer></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
 </head>
 <body>
     <div class="container">

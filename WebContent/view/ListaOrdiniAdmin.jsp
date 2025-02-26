@@ -1,6 +1,6 @@
 <%@ page session="true" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.*, model.javaBeans.Ordine, model.DAO.OrdineDAO, model.javaBeans.Acquisto, model.DAO.AcquistoDAO" %>
+<%@ page import="java.util.*, java.text.SimpleDateFormat, model.javaBeans.Ordine, model.DAO.OrdineDAO, model.javaBeans.Acquisto, model.DAO.AcquistoDAO" %>
 <%@ page import="com.google.gson.Gson" %>
 <%@ page import="model.javaBeans.Utente, model.DAO.UtenteDAO"%>
 <%
@@ -12,10 +12,55 @@
 	}
 	
     OrdineDAO ordineDAO = new OrdineDAO();
-    List<Ordine> ordini = ordineDAO.getAllOrders(); // Ottieni tutti gli ordini dal database
+    List<Ordine> tuttiOrdini = ordineDAO.getAllOrders();
+
+    // Ottieni parametri di filtro dalla request
+    String startDateStr = request.getParameter("startDate");
+    String endDateStr = request.getParameter("endDate");
+    String usernameFilter = request.getParameter("username");
+
+    Date startDate = null;
+    Date endDate = null;
+    List<Ordine> ordiniFiltrati = new ArrayList<>();
+
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    // Converte le date solo se presenti
+    try {
+        if (startDateStr != null && !startDateStr.isEmpty()) {
+            startDate = sdf.parse(startDateStr);
+        }
+        if (endDateStr != null && !endDateStr.isEmpty()) {
+            endDate = sdf.parse(endDateStr);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    // Applica il filtro agli ordini
     float totaleSpeso = 0;
-    for (Ordine ordine : ordini) {
-        totaleSpeso += ordine.getPrezzoTotale();
+    if (tuttiOrdini != null) {
+        for (Ordine ordine : tuttiOrdini) {
+            boolean include = true;
+
+            // Filtra per data
+            if (startDate != null && ordine.getDataOrdine().before(startDate)) {
+                include = false;
+            }
+            if (endDate != null && ordine.getDataOrdine().after(endDate)) {
+                include = false;
+            }
+
+            // Filtra per username
+            if (usernameFilter != null && !usernameFilter.isEmpty() &&
+                !ordine.getUsername().equalsIgnoreCase(usernameFilter)) {
+                include = false;
+            }
+
+            if (include) {
+                ordiniFiltrati.add(ordine);
+                totaleSpeso += ordine.getPrezzoTotale();
+            }
+        }
     }
 %>
 
@@ -25,114 +70,59 @@
     <meta charset="UTF-8">
     <title>Lista Ordini</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        .order-table th, .order-table td {
-            text-align: center;
-        }
-        .order-table img {
-            max-width: 50px;
-        }
-        .order-total {
-            font-weight: bold;
-        }
-        .sortable {
-            cursor: pointer;
-        }
-        .sort-indicator {
-            margin-left: 5px;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
         <h1 class="my-4 text-center">Lista Ordini</h1>
-		<div class="order-total text-right">
+
+        <!-- Form per filtrare gli ordini -->
+        <h2 class="mt-4">Filtra Ordini</h2>
+        <form method="GET" class="form-inline">
+            <label class="mr-2" for="startDate">Data inizio:</label>
+            <input type="date" id="startDate" name="startDate" class="form-control mr-2" value="<%= startDateStr != null ? startDateStr : "" %>">
+
+            <label class="mr-2" for="endDate">Data fine:</label>
+            <input type="date" id="endDate" name="endDate" class="form-control mr-2" value="<%= endDateStr != null ? endDateStr : "" %>">
+
+            <label class="mr-2" for="username">Username Cliente:</label>
+            <input type="text" id="username" name="username" class="form-control mr-2" value="<%= usernameFilter != null ? usernameFilter : "" %>">
+
+            <button type="submit" class="btn btn-primary">Filtra</button>
+        </form>
+
+        <div class="order-total text-right">
             <p>Totale Guadagnato: €<%= totaleSpeso %></p>
         </div>
+
         <table class="table table-bordered table-striped order-table">
             <thead class="thead-dark">
                 <tr>
                     <th>ID Ordine</th>
-                    <th class="sortable" onclick="sortTable('utente')">Utente <span class="sort-indicator" id="utente-indicator">▼</span></th>
-                    <th class="sortable" onclick="sortTable('data-ordine')">Data Ordine <span class="sort-indicator" id="data-ordine-indicator">▼</span></th>
+                    <th>Utente</th>
+                    <th>Data Ordine</th>
                     <th>Data Consegna</th>
-                    <th class="sortable" onclick="sortTable('prezzo-totale')">Prezzo Totale <span class="sort-indicator" id="prezzo-totale-indicator">▼</span></th>
+                    <th>Prezzo Totale</th>
                     <th>Visualizza Fattura</th>
                 </tr>
             </thead>
-            <tbody id="order-table-body">
-                <% for (Ordine ordine : ordini) { %>
-                    <tr class="order-row">
-                        <td><%= ordine.getIDOrdine() %></td>
-                        <td class="utente" data-order="<%= ordine.getUsername() %>"><%= ordine.getUsername() %></td>
-                        <td class="data-ordine" data-order="<%= ordine.getDataOrdine().getTime() %>"><%= ordine.getDataOrdine() %></td>
-                        <td><%= ordine.getDataConsegna() %></td>
-                        <td class="prezzo-totale" data-order="<%= ordine.getPrezzoTotale() %>">€<%= ordine.getPrezzoTotale() %></td>
-                        <td>
-                            <form action="<%= request.getContextPath() %>/ViewOrderPDFServlet" method="get" target="_blank">
-                                <input type="hidden" name="orderId" value="<%= ordine.getIDOrdine() %>">
-                                <button type="submit">Visualizza Fattura</button>
-                            </form>
-                        </td>
-                    </tr>
+            <tbody>
+                <% for (Ordine ordine : ordiniFiltrati) { %>
+                <tr>
+                    <td><%= ordine.getIDOrdine() %></td>
+                    <td><%= ordine.getUsername() %></td>
+                    <td><%= ordine.getDataOrdine() %></td>
+                    <td><%= ordine.getDataConsegna() %></td>
+                    <td>€<%= ordine.getPrezzoTotale() %></td>
+                    <td>
+                        <form action="<%= request.getContextPath() %>/ViewOrderPDFServlet" method="get" target="_blank">
+                            <input type="hidden" name="orderId" value="<%= ordine.getIDOrdine() %>">
+                            <button type="submit">Visualizza Fattura</button>
+                        </form>
+                    </td>
+                </tr>
                 <% } %>
             </tbody>
         </table>
-
-        
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        var currentSortColumn = 'data-ordine';
-        var currentSortOrder = 'asc';
-
-        function sortTable(columnClass) {
-            var table = document.getElementById('order-table-body');
-            var rows = Array.from(table.getElementsByClassName('order-row'));
-            var sortOrder = (currentSortColumn === columnClass && currentSortOrder === 'asc') ? 'desc' : 'asc';
-            currentSortColumn = columnClass;
-            currentSortOrder = sortOrder;
-
-            rows.sort(function(a, b) {
-                var aValue = a.getElementsByClassName(columnClass)[0].getAttribute('data-order');
-                var bValue = b.getElementsByClassName(columnClass)[0].getAttribute('data-order');
-
-                // Gestisci i casi numerici
-                if (columnClass === 'prezzo-totale' || columnClass === 'data-ordine') {
-                    aValue = parseFloat(aValue);
-                    bValue = parseFloat(bValue);
-                    return sortOrder === 'asc' ? aValue - bValue : bValue - aValue;
-                } 
-                // Gestisci l'ordinamento alfabetico per "utente"
-                else if (columnClass === 'utente') {
-                    return sortOrder === 'asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
-                }
-            });
-
-            // Rimuovi tutte le righe esistenti e aggiungi le righe ordinate
-            while (table.firstChild) {
-                table.removeChild(table.firstChild);
-            }
-            rows.forEach(function(row) {
-                table.appendChild(row);
-            });
-
-            // Aggiorna l'indicatore di ordinamento
-            updateSortIndicators();
-        }
-
-
-        function updateSortIndicators() {
-            var indicators = document.querySelectorAll('.sort-indicator');
-            indicators.forEach(function(indicator) {
-                indicator.textContent = '';
-            });
-            var currentIndicator = document.getElementById(currentSortColumn + '-indicator');
-            currentIndicator.textContent = currentSortOrder === 'asc' ? '▲' : '▼';
-        }
-    </script>
 </body>
 </html>
