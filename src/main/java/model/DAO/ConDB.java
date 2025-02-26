@@ -20,9 +20,9 @@ public class ConDB  {
 		Connection newConnection = null;
 		String ip = "127.0.0.1";
 		String port = "3306";
-		String db = "tilesandtales";
+		String db = "talesandtiles";
 		String username = "root";
-		String password = "220803";   
+		String password = "";   
 
 		newConnection = DriverManager.getConnection("jdbc:mysql://"+ ip+":"+ port+"/"+db, username, password);
 
